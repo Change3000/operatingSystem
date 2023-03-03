@@ -1,0 +1,40 @@
+#include <iostream>
+#include <queue>
+#include <vector>
+
+using namespace std;
+struct Process {
+    int id;
+    int priority;
+    int burst_time;
+    int remaining_time;
+    int executed_time;
+};
+
+struct ComparePriority {
+    bool comapare()(const Process& p1, const Process& p2) const {
+        return p1.priority < p2.priority;
+    }
+};
+
+int main(){
+    priority_queue<Process, vector<process>, ComparePriority> q1; 
+    queue<Process> q2;
+
+    q1.push({1, 0, 8, 8, 0});
+    q1.push({2, 1, 10, 10, 0});
+    q1.push({3, 0, 6, 6, 0});
+
+    q1.push({4, 2, 7, 7, 0});
+
+    int current_time = 0;
+    Process current_process;
+
+    while (!q1.empty() || !q2.empty()) {
+        if (!q1.empty() && q1.top().priority < current_process.priority) {
+            q2.push(current_process);
+            current_process = q1.top();
+            q1.pop();
+        }
+
+       
